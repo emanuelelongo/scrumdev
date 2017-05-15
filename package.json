@@ -5,14 +5,11 @@
     "main": "lib/index.js",
     "jest": {
         "collectCoverageFrom": [
-            "**/*.{js}",
-            "!**/node_modules/**",
-            "!**/dist/**",
-            "!**/coverage/**"
+            "lib/**/*.{js}"
         ]
     },
     "scripts": {
-        "start": "nodemon lib/index.js --exec babel-node --presets es2015,stage-2",
+        "start": "nodemon index.js --exec babel-node --presets es2015,stage-2",
         "test": "jest",
         "coverage": "jest --coverage --watch"
     },
