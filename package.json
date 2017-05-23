@@ -3,11 +3,6 @@
     "version": "1.0.0",
     "description": "Example Node Server w/ Babel",
     "main": "src/index.js",
-    "jest": {
-        "collectCoverageFrom": [
-            "src/**/*.{js}"
-        ]
-    },
     "scripts": {
         "pwdstrength": "nodemon src/pwdstrength/pwdstrength.js --exec babel-node --presets es2015,stage-2",
         "pwdstrength:test": "jest src/pwdstrength --coverage --watch",
