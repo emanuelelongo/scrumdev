@@ -1,4 +1,4 @@
-import { pwdstrength, pwdstrengthAdmin } from '../refact'
+import { pwdstrength, pwdstrengthAdmin } from '../pwdstrength'
 
 test('it should have at least 7 characters', () => {
     expect(pwdstrength('aaa')).toBe(false);
