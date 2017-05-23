@@ -20,7 +20,7 @@ test('should convert to a basic roman symbol', () => {
     expect(convertToRoman(1000)).toEqual('M')
 })
 
-test('should decompose a number to its major factor', () => {
+test('should decompose a number', () => {
     expect(decompose(1000)).toEqual({high:1000, low: 0})
     expect(decompose(9999)).toEqual({high:9000, low:999})
     expect(decompose(100)).toEqual({high: 100,low: 0})
@@ -38,7 +38,7 @@ test('should convert a two digit number', () => {
     expect(convertToRoman(58)).toEqual('LVIII')
 })
 
-test('should convert a three digit number', () => {
+test('should convert a three or more digit number', () => {
     expect(convertToRoman(100)).toEqual('C')
     expect(convertToRoman(101)).toEqual('CI')
     expect(convertToRoman(110)).toEqual('CX')
