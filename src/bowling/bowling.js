@@ -1,37 +1,41 @@
 export default function score(game) {
-    return 0
+    const frames = game
+        .replace('||', '|')
+        .split('|')
+
+    let pins = [parseInt(frames[10][0])||10, parseInt(frames[10][1])||10]
+    let total = 0
+    for(let i = 9; i >= 0; i--) {
+        const res = scoreFrame(frames[i], [pins[0], pins[1]])
+        pins = [...res.pins, ...pins]
+        total += res.score
+    }
+    return total
 }
 
 export function scoreFrame(frame, nexts) {
+    frame = frame.replace(/-/g, '0')
+
     if(frame === 'X') {
         return {
-            pins: 10,
+            pins: [10],
             score: 10 + (nexts[0] || 0) + (nexts[1] || 0),
             bonus: 2
         }
     }
 
     if(frame.indexOf('/') === 1) {
+        const first = parseInt(frame[0])
         return {
-            pins: parseInt(frame[0]),
+            pins: [first, 10-first],
             score: 10 + (nexts[0] || 0),
             bonus: 1
         }
     }
 
-    if(frame.indexOf('-') === 1) {
-        return {
-            pins: parseInt(frame[0]),
-            score: parseInt(frame[0]),
-            bonus: 0
-        }
-    }
-
-    if(frame.indexOf('-') === 0) {
-        return {
-            pins: 0,
-            score: 0,
-            bonus: 0
-        }
+    return {
+        pins: [parseInt(frame[0]), parseInt(frame[1])],
+        score: parseInt(frame.replace('0', '')),
+        bonus: 0
     }
 }
