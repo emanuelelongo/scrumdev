@@ -2,8 +2,8 @@ export default function score(game) {
     const frames = game
         .replace('||', '|')
         .split('|')
-
-    let pins = [parseInt(frames[10][0])||10, parseInt(frames[10][1])||10]
+        
+    let pins = lastFramePins(frames[10])
     let total = 0
     for(let i = 9; i >= 0; i--) {
         const res = scoreFrame(frames[i], [pins[0], pins[1]])
@@ -13,9 +13,14 @@ export default function score(game) {
     return total
 }
 
+export function lastFramePins(frame) {
+    return (frame||'00').split('').map(i => {
+        return i == 'X' ? 10: (parseInt(i) || 0)
+    })
+}
+
 export function scoreFrame(frame, nexts) {
     frame = frame.replace(/-/g, '0')
-
     if(frame === 'X') {
         return {
             pins: [10],
@@ -23,7 +28,6 @@ export function scoreFrame(frame, nexts) {
             bonus: 2
         }
     }
-
     if(frame.indexOf('/') === 1) {
         const first = parseInt(frame[0])
         return {
@@ -32,7 +36,6 @@ export function scoreFrame(frame, nexts) {
             bonus: 1
         }
     }
-
     return {
         pins: [parseInt(frame[0]), parseInt(frame[1])],
         score: parseInt(frame.replace('0', '')),
